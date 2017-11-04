@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, Image, ActivityIndicator} from 'react-native';
-import { Card } from 'react-native-elements'
+import {View, Text, Image, ActivityIndicator, FlatList} from 'react-native';
+import {Card} from 'react-native-elements';
 import Http from '../utils/http';
 
 
@@ -40,12 +40,12 @@ class GameList extends Component {
         });
     }
 
-    gameItem(item, index){
-        return(
-            <Card key={index}>
-                <Text> {item.name} </Text>
+    gameItem({item}) {
+        return (
+            <Card title={item.name}>
+                <Text> {'Jogado ' + item.numberOfSessions + ' vezes.'} </Text>
             </Card>
-        )
+        );
     }
 
     render() {
@@ -56,7 +56,13 @@ class GameList extends Component {
                 </View>
             );
         } else {
-            return this.state.games.map(this.gameItem);
+            return (
+                <FlatList
+                    data={this.state.games}
+                    keyExtractor={(item, index) => item.id}
+                    renderItem={this.gameItem}
+                />
+            );
         }
     }
 }
