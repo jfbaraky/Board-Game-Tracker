@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
-import {} from 'react-native';
+import React, {Component} from 'react';
+import Navigation from './navigation';
+import Http from './utils/http';
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <View>
+class App extends Component {
+    componentWillMount() {
+        Http.config(__DEV__);
+    }
 
-      </View>
-    );
-  }
+    render() {
+        return (
+            <Navigation/>
+        );
+    }
 }
+
+export default App;
